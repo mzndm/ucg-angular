@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "mperry1992",
+      "first_name": "Matthew",
+      "last_name": "Perry",
+      "email": "mperry1992@mail.com",
+      "password": "q1324567",
+      "user_type": "Admin"
+    }
+  ]
+}
