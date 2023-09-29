@@ -8,6 +8,24 @@
       "email": "mperry1992@mail.com",
       "password": "q1324567",
       "user_type": "Admin"
+    },
+    {
+      "id": "2",
+      "username": "mperry1993",
+      "first_name": "Matthew",
+      "last_name": "Perry",
+      "email": "mperry1992@mail.com",
+      "password": "q1324567",
+      "user_type": "Admin"
+    },
+    {
+      "id": "3",
+      "username": "mperry1994",
+      "first_name": "Matthew",
+      "last_name": "Perry",
+      "email": "mperry1992@mail.com",
+      "password": "q1324567",
+      "user_type": "Admin"
     }
   ]
 }

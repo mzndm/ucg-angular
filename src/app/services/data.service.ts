@@ -16,4 +16,8 @@ export class DataService {
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>(`${this.apiBasePath}/users`);
   }
+
+  getUser(id: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.apiBasePath}/users/${id}`);
+  }
 }

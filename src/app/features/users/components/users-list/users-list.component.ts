@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IUser} from "../../../../core/models";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-users-list',
@@ -9,12 +10,15 @@ import {IUser} from "../../../../core/models";
 export class UsersListComponent {
   @Input() users: IUser[] | null = [];
 
-  createUser(): void {
-    console.log('createUser click');
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
   }
 
   selectUser(user: IUser): void {
-    console.log('selectUser click', user)
+    const userId = user ? user.id : null;
+    this.router.navigate([`/users/${user}`]);
   }
 
 }
