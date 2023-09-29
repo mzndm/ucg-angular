@@ -1,0 +1,27 @@
+<div class="users-list">
+  <header class="content__header">
+    <button class="button button_primary" (click)="createUser()">Create User</button>
+  </header>
+
+  <div class="users-list__content">
+    <table class="table">
+      <tr class="table__header">
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Type</th>
+      </tr>
+
+      <tr class="table__row"
+          *ngFor="let user of users"
+          (click)="selectUser(user)">
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.user_type }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
