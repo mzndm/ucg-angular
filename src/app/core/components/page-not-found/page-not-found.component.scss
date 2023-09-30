@@ -1,0 +1,53 @@
+@import "variables";
+
+.page-error {
+  background-color: $list-bg;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+  }
+
+  &__icon {
+    background-color: $list-bg-active;
+    padding: 100px;
+    border-radius: 50%;
+    margin-right: -60px;
+
+    svg {
+      width: 150px;
+      height: 150px;
+
+      path {
+        fill: $font-color;
+      }
+
+      circle {
+        fill: $font-color;
+      }
+    }
+  }
+
+  &__content {
+    font: $main-font;
+    color: $font-color;
+  }
+
+  &__title {
+    font-size: 50px;
+  }
+
+  &__link {
+    color: $primary;
+    text-decoration: none;
+    line-height: 32px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
