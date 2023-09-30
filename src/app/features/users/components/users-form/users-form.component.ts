@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, UrlSegment} from "@angular/router";
 import {IUser} from "../../../../core/models";
-import {Observable, of, switchMap, tap} from "rxjs";
+import {Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {DataService} from "../../../../services/data.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -10,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.scss']
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent implements OnInit, OnDestroy {
   user$!: Observable<IUser | null>;
 
   userForm: FormGroup = this.fb.group({
@@ -24,6 +24,7 @@ export class UsersFormComponent implements OnInit {
   });
 
   warn: any;
+  private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -46,11 +47,31 @@ export class UsersFormComponent implements OnInit {
     );
   }
 
-  closeEditor(): void {}
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
-  saveNewUser(): void {}
+  closeEditor(): void {
+    // todo: show alarm for unsaved changes
+    this.router.navigate(['/users'])
+  }
 
-  updateUser(): void {}
+  saveNewUser(): void {
+    this.dataService.saveUser(this.userForm.value)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.closeEditor());
+  }
 
-  deleteUser(): void {}
+  updateUser(): void {
+    this.dataService.updateUser(this.userForm.value)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.closeEditor());
+  }
+
+  deleteUser(): void {
+    this.dataService.deleteUser(this.userForm.value.id)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.closeEditor());
+  }
 }

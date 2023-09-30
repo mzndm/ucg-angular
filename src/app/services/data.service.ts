@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, switchMap, tap} from "rxjs";
 import {IUser} from "../core/models";
 
 @Injectable({
@@ -9,15 +9,34 @@ import {IUser} from "../core/models";
 export class DataService {
 
   private apiBasePath = 'http://localhost:3000';
-
+  users$ = new BehaviorSubject<IUser[]>([]);
   constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.apiBasePath}/users`);
+    return this.http.get<IUser[]>(`${this.apiBasePath}/users`)
+      .pipe(
+        tap(value => this.users$.next(value)),
+        switchMap(() => this.users$.asObservable())
+      );
   }
 
   getUser(id: string): Observable<IUser> {
     return this.http.get<IUser>(`${this.apiBasePath}/users/${id}`);
+  }
+
+  saveUser(user: IUser): Observable<IUser[]> {
+    return this.http.post(`${this.apiBasePath}/users`, user)
+      .pipe(switchMap(() => this.getUsers()));
+  }
+
+  updateUser(user: IUser): Observable<IUser[]> {
+    return this.http.put(`${this.apiBasePath}/users/${user.id}`, user)
+      .pipe(switchMap(() => this.getUsers()));
+  }
+
+  deleteUser(userId: string): Observable<IUser[]> {
+    return this.http.delete(`${this.apiBasePath}/users/${userId}`)
+      .pipe(switchMap(() => this.getUsers()));
   }
 }

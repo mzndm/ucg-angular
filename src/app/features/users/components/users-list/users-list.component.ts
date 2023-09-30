@@ -18,7 +18,7 @@ export class UsersListComponent {
 
   selectUser(user: IUser): void {
     const userId = user ? user.id : null;
-    this.router.navigate([`/users/${user}`]);
+    this.router.navigate([`/users/${userId}`]);
   }
 
 }
