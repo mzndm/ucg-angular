@@ -85,11 +85,17 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     if (this.userForm.valid) {
       this.dataService.saveUser(this.userForm.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => {
-          this.closeEditor();
-          this.messageService.showMessage({
-            type: MessageType.SUCCESS,
-            text: 'User successfully created!'
+        .subscribe({
+          next: () => {
+            this.closeEditor();
+            this.messageService.showMessage({
+              type: MessageType.SUCCESS,
+              text: 'User successfully created!'
+            })
+          },
+          error: (error) => this.messageService.showMessage({
+            type: MessageType.ERROR,
+            text: error?.message
           })
         });
     }
@@ -99,11 +105,17 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     if (this.userForm.valid) {
       this.dataService.updateUser(this.userForm.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => {
-          this.closeEditor();
-          this.messageService.showMessage({
-            type: MessageType.SUCCESS,
-            text: 'User successfully updated!'
+        .subscribe({
+          next: () => {
+            this.closeEditor();
+            this.messageService.showMessage({
+              type: MessageType.SUCCESS,
+              text: 'User successfully updated!'
+            })
+          },
+          error: (error) => this.messageService.showMessage({
+            type: MessageType.ERROR,
+            text: error?.message
           })
         });
     }
@@ -112,11 +124,17 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   deleteUser(): void {
     this.dataService.deleteUser(this.userForm.value.id)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.closeEditor();
-        this.messageService.showMessage({
-          type: MessageType.SUCCESS,
-          text: 'User successfully deleted!'
+      .subscribe({
+        next: () => {
+          this.closeEditor();
+          this.messageService.showMessage({
+            type: MessageType.SUCCESS,
+            text: 'User successfully deleted!'
+          })
+        },
+        error: (error) => this.messageService.showMessage({
+          type: MessageType.ERROR,
+          text: error?.message
         })
       });
   }
