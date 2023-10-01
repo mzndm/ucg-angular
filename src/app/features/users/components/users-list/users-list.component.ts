@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IUser} from "../../../../core/models";
-import {ActivatedRoute, Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-users-list',
@@ -10,10 +11,19 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class UsersListComponent {
   @Input() users: IUser[] | null = [];
 
+  activeUserId: string | undefined;
+
   constructor(
-    private route: ActivatedRoute,
     private router: Router
   ) {
+    this.findActiveUserId();
+    router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => this.findActiveUserId());
+  }
+
+  findActiveUserId(): void {
+    this.activeUserId = this.router.url.split('/')[2];
   }
 
   selectUser(user: IUser): void {

@@ -1,0 +1,55 @@
+@import "variables";
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  font: $main-font;
+  background-color: $main-bg;
+  padding: 56px 46px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 11px;
+}
+
+.content {
+  display: flex;
+  gap: 26px;
+  width: 100%;
+
+  &__list {
+    flex-grow: 1;
+  }
+
+  &__form {
+    width: 584px;
+    padding-top: 62px;
+  }
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  min-width: 281px;
+  color: $white;
+  border-radius: 6px;
+  padding: 0 26px;
+  visibility: hidden;
+
+  &_visible {
+    visibility: visible;
+  }
+
+  &__warn {
+    background-color: $warn;
+    box-shadow: 0 10px 15px $warn-shadow;
+  }
+
+  &__success {
+    background-color: $success;
+    box-shadow: 0 10px 15px $success-shadow;
+  }
+}

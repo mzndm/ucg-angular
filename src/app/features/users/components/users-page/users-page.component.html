@@ -10,8 +10,12 @@
   </header>
 
   <div class="content">
-    <app-users-list [users]="users$ | async"></app-users-list>
+    <div class="content__list">
+      <app-users-list [users]="users$ | async"></app-users-list>
+    </div>
 
-    <router-outlet></router-outlet>
+    <div class="content__form">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

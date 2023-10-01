@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body, p {
+  margin: 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  min-width: 120px;
+  font: $title-font;
+  font-weight: normal;
+  text-align: center;
+  color: $white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &_primary {
+    background-color: $primary;
+    box-shadow: 0 5px 8px $primary-shadow;
+  }
+
+  &_alarm {
+    background-color: $alarm;
+    box-shadow: 0 5px 8px $alarm-shadow;
+  }
+}

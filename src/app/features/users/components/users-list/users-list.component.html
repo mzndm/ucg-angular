@@ -1,5 +1,5 @@
 <div class="users-list">
-  <header class="content__header">
+  <header class="users-list__header">
     <a class="button button_primary" routerLink="new">Create User</a>
   </header>
 
@@ -15,6 +15,7 @@
 
       <tr class="table__row"
           *ngFor="let user of users"
+          [class.active]="activeUserId === user.id"
           (click)="selectUser(user)">
         <td>{{ user.username }}</td>
         <td>{{ user.first_name }}</td>

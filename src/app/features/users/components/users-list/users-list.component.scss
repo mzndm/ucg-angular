@@ -1,0 +1,56 @@
+@import 'variables';
+
+.users-list {
+  flex-grow: 2;
+  height: 100%;
+  min-height: 817px;
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+    height: 62px;
+  }
+
+  &__content {
+    height: calc(100% - 62px);
+    background-color: $white;
+    box-shadow: 0 0 30px $shadow;
+    border: 1px solid $border;
+    border-radius: 6px;
+  }
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+
+  &__header {
+    height: 55px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $grey;
+  }
+
+  &__row {
+    height: 56px;
+    max-height: 56px;
+    background-color: $list-bg;
+    border-bottom: 2px solid $white;
+    cursor: pointer;
+
+
+    &.active {
+      background-color: $list-bg-active;
+    }
+
+    td {
+      height: 56px;
+      color: $font-color;
+    }
+  }
+
+  th, td {
+    padding: 0 0 0 26px;
+  }
+}

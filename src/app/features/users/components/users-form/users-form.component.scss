@@ -1,0 +1,92 @@
+@import "variables";
+
+.form {
+  width: 100%;
+  background-color: $white;
+  box-shadow: 0 0 30px $shadow;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 26px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+    padding-bottom: 26px;
+  }
+
+  &__close {
+    min-width: 24px;
+    background-color: $white;
+
+    &:hover {
+      .a1 {
+        fill: $warn;
+      }
+    }
+  }
+
+  &__title {
+    font: $title-font;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__field {
+    position: relative;
+    padding-bottom: 16px;
+
+    &-icon {
+      position: absolute;
+      top: 30px;
+      left: 16px;
+    }
+  }
+
+  &__label {
+    display: block;
+    color: $font-color;
+    padding-bottom: 3px;
+  }
+
+  &__input {
+    display: block;
+    height: 46px;
+    width: 100%;
+    font: 300 $main-font;
+    color: $font-color;
+    background-color: $input-bg;
+    border: 0;
+    border-radius: 6px;
+    padding: 0 16px;
+    outline: none;
+
+    &_warn {
+      border: 1px solid $warn;
+    }
+
+    &[type=email] {
+      padding-left: 46px;
+    }
+  }
+
+  &__error {
+    color: $warn;
+    padding-top: 3px;
+  }
+
+  &__select {
+    border-right: 16px solid $input-bg;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 17px;
+
+    &_center {
+      justify-content: center;
+    }
+  }
+}
