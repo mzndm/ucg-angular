@@ -77,7 +77,7 @@
       <label for="password" class="form__label">Password*</label>
       <input id="password" class="form__input"
              [class.form__input_warn]="password?.invalid && (password?.dirty || password?.touched)"
-             formControlName="password" type="password">
+             formControlName="password" type="password" appPasswordVisibility>
       <div class="form__error"
            *ngIf="password?.invalid && (password?.dirty || password?.touched)">
         <p *ngIf="password?.hasError('required')">This field is required</p>
@@ -89,7 +89,7 @@
       <label for="repeat_password" class="form__label">Repeat password*</label>
       <input id="repeat_password" class="form__input"
              [class.form__input_warn]="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)"
-             formControlName="repeat_password" type="password">
+             formControlName="repeat_password" type="password" appPasswordVisibility>
       <div class="form__error"
            *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
         <p *ngIf="repeatPassword?.hasError('required')">This field is required</p>

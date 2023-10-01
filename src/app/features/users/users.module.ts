@@ -5,6 +5,7 @@ import { UsersPageComponent } from './components/users-page/users-page.component
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UsersFormComponent } from './components/users-form/users-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {PasswordVisibilityDirective} from "./directives/password-visibility.directive";
 
 
 
@@ -12,7 +13,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     UsersPageComponent,
     UsersListComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    PasswordVisibilityDirective
   ],
   imports: [
     CommonModule,

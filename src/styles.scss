@@ -32,4 +32,24 @@ body, p {
     background-color: $alarm;
     box-shadow: 0 5px 8px $alarm-shadow;
   }
+
+  &_icon {
+    min-width: 46px;
+
+    &.form__field-button {
+      position: absolute;
+      top: 19px;
+      right: 0;
+      background-color: $input-bg;
+
+      path {
+        fill: $font-color;
+      }
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
