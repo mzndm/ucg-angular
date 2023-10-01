@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AppComponent} from "./app.component";
 import {PageNotFoundComponent} from "./core/components/page-not-found/page-not-found.component";
+import {ForbiddenPageComponent} from "./core/components/forbidden-page/forbidden-page.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
           .then(module => module.UsersModule)
       }
     ]
+  },
+  {
+    path: 'admin',
+    component: ForbiddenPageComponent
   },
   {
     path: '**',

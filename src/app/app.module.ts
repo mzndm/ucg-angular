@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import { ForbiddenPageComponent } from './core/components/forbidden-page/forbidden-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ForbiddenPageComponent
   ],
   imports: [
     BrowserModule,
