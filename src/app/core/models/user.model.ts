@@ -1,5 +1,3 @@
-import {UserType} from "../enums";
-
 export interface IUser {
   id?: string,
   username: string,
@@ -8,4 +6,9 @@ export interface IUser {
   email: string,
   password: string,
   user_type: UserType
+}
+
+export enum UserType {
+  ADMIN = 'Admin',
+  DRIVER = 'Driver'
 }

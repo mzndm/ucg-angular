@@ -9,8 +9,10 @@
 }
 
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  height: 67px;
   padding-bottom: 11px;
 }
 
@@ -30,6 +32,7 @@
 }
 
 .message {
+  position: absolute;
   display: flex;
   align-items: center;
   height: 56px;
@@ -37,18 +40,15 @@
   color: $white;
   border-radius: 6px;
   padding: 0 26px;
-  visibility: hidden;
 
-  &_visible {
-    visibility: visible;
-  }
-
-  &__warn {
+  &__error {
+    left: 0;
     background-color: $warn;
     box-shadow: 0 10px 15px $warn-shadow;
   }
 
   &__success {
+    right: 0;
     background-color: $success;
     box-shadow: 0 10px 15px $success-shadow;
   }

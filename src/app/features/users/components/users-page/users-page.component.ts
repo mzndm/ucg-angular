@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DataService} from "../../../../services/data.service";
+import {MessageService} from "../../../../services/message.service";
 
 @Component({
   selector: 'app-users-page',
@@ -7,8 +8,13 @@ import {DataService} from "../../../../services/data.service";
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent {
-  constructor(private dataService: DataService) {
+  constructor(
+    private dataService: DataService,
+    private messageService: MessageService
+    ) {
   }
 
+  public message$ = this.messageService.message$;
   public users$ = this.dataService.getUsers();
 }
+

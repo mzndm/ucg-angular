@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, UrlSegment} from "@angular/router";
-import {IUser} from "../../../../core/models";
+import {IUser, MessageType} from "../../../../core/models";
 import {Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {DataService} from "../../../../services/data.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidationService} from "../../../../services/custom-validation.service";
+import {MessageService} from "../../../../services/message.service";
 
 @Component({
   selector: 'app-users-form',
@@ -50,9 +51,10 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: DataService,
     private fb: FormBuilder,
-    private customValidator: CustomValidationService
+    private dataService: DataService,
+    private customValidator: CustomValidationService,
+    private messageService: MessageService,
   ) {
   }
 
@@ -76,15 +78,20 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   }
 
   closeEditor(): void {
-    // todo: show alarm for unsaved changes
-    this.router.navigate(['/users'])
+    this.router.navigate(['/users']);
   }
 
   saveNewUser(): void {
     if (this.userForm.valid) {
       this.dataService.saveUser(this.userForm.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => this.closeEditor());
+        .subscribe(() => {
+          this.closeEditor();
+          this.messageService.showMessage({
+            type: MessageType.SUCCESS,
+            text: 'User successfully created!'
+          })
+        });
     }
   }
 
@@ -92,13 +99,25 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     if (this.userForm.valid) {
       this.dataService.updateUser(this.userForm.value)
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(() => this.closeEditor());
+        .subscribe(() => {
+          this.closeEditor();
+          this.messageService.showMessage({
+            type: MessageType.SUCCESS,
+            text: 'User successfully updated!'
+          })
+        });
     }
   }
 
   deleteUser(): void {
     this.dataService.deleteUser(this.userForm.value.id)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.closeEditor());
+      .subscribe(() => {
+        this.closeEditor();
+        this.messageService.showMessage({
+          type: MessageType.SUCCESS,
+          text: 'User successfully deleted!'
+        })
+      });
   }
 }

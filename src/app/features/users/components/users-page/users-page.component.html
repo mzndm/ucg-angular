@@ -1,12 +1,10 @@
 <div class="container">
   <header class="header">
-    <div class="message message__warn">
-      <p class="message__text">Error message</p>
-    </div>
-
-    <div class="message message__success">
-      <p class="message__text">Success message</p>
-    </div>
+    <ng-container *ngIf="message$ | async as message">
+      <div class="message message__{{message.type}}">
+        <p class="message__text">{{message.text}}</p>
+      </div>
+    </ng-container>
   </header>
 
   <div class="content">
