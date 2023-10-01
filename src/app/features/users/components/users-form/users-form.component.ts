@@ -4,6 +4,7 @@ import {IUser} from "../../../../core/models";
 import {Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {DataService} from "../../../../services/data.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CustomValidationService} from "../../../../services/custom-validation.service";
 
 @Component({
   selector: 'app-users-form',
@@ -15,22 +16,43 @@ export class UsersFormComponent implements OnInit, OnDestroy {
 
   userForm: FormGroup = this.fb.group({
     id: [null],
-    username: ['', Validators.required],
-    first_name: [''],
-    last_name: [''],
-    email: [''],
-    password: [''],
-    user_type: ['']
+    username: ['', [Validators.required]],
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    email: ['', {
+      validators: [Validators.required, Validators.email],
+      updateOn: 'blur'
+    }],
+    user_type: ['', Validators.required],
+    password: ['', {
+      validators: [Validators.required, this.customValidator.passwordValidator()],
+      updateOn: 'blur'
+    }],
+    repeat_password: ['', {
+      validators: [Validators.required],
+      updateOn: 'blur'
+    }]
+  },
+  {
+    validators: [this.customValidator.matchPassword('password', 'repeat_password')]
   });
 
-  warn: any;
+  get username() { return this.userForm.get('username'); }
+  get firstName() { return this.userForm.get('first_name'); }
+  get lastName() { return this.userForm.get('last_name'); }
+  get email() { return this.userForm.get('email'); }
+  get password() { return this.userForm.get('password'); }
+  get repeatPassword() { return this.userForm.get('repeat_password'); }
+  get userType() { return this.userForm.get('user_type'); }
+
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private customValidator: CustomValidationService
   ) {
   }
 
@@ -38,6 +60,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     this.user$ = this.route.url.pipe(
       switchMap((urls: UrlSegment[]) => {
         if (urls[0].path === 'new') {
+          this.username?.addAsyncValidators([this.customValidator.usernameValidator()])
           return of(this.userForm.value)
         } else {
           return this.dataService.getUser(urls[0].path)
@@ -58,15 +81,19 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   }
 
   saveNewUser(): void {
-    this.dataService.saveUser(this.userForm.value)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.closeEditor());
+    if (this.userForm.valid) {
+      this.dataService.saveUser(this.userForm.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => this.closeEditor());
+    }
   }
 
   updateUser(): void {
-    this.dataService.updateUser(this.userForm.value)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.closeEditor());
+    if (this.userForm.valid) {
+      this.dataService.updateUser(this.userForm.value)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => this.closeEditor());
+    }
   }
 
   deleteUser(): void {

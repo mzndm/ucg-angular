@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable, switchMap, tap} from "rxjs";
+import {BehaviorSubject, Observable, of, switchMap, tap} from "rxjs";
 import {IUser} from "../core/models";
 
 @Injectable({
@@ -38,5 +38,9 @@ export class DataService {
   deleteUser(userId: string): Observable<IUser[]> {
     return this.http.delete(`${this.apiBasePath}/users/${userId}`)
       .pipe(switchMap(() => this.getUsers()));
+  }
+
+  checkIfUsernameExists(value: string): Observable<boolean> {
+    return of(this.users$.value.some(u => u.username === value) as boolean);
   }
 }

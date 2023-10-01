@@ -1,6 +1,5 @@
 <div *ngIf="user$ | async as user">
-
-  <form class="form" [formGroup]="userForm">
+  <form class="form" [formGroup]="userForm" autocomplete="off">
     <header class="form__header">
       <h3 class="form__title">
         {{ !user.id ? 'Create new user' : user.first_name + ' ' + user.last_name }}
@@ -11,60 +10,97 @@
 
     <div class="form__field">
       <label for="username" class="form__label">Username*</label>
-      <input id="username"
-             class="form__input" [class.form__input_warn]="warn"
+      <input id="username" class="form__input"
+             [class.form__input_warn]="username?.invalid && (username?.dirty || username?.touched)"
              formControlName="username" type="text">
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+        <p *ngIf="username?.hasError('required')">This field is required</p>
+        <p *ngIf="username?.hasError('usernameExists')">This username already exists</p>
+      </div>
     </div>
 
     <div class="form__field">
       <label for="first_name" class="form__label">First name*</label>
       <input id="first_name" class="form__input"
+             [class.form__input_warn]="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
              formControlName="first_name" type="text">
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+        <p *ngIf="firstName?.hasError('required')">This field is required</p>
+      </div>
     </div>
 
     <div class="form__field">
       <label for="last_name" class="form__label">Last name*</label>
       <input id="last_name" class="form__input"
+             [class.form__input_warn]="lastName?.invalid && (lastName?.dirty || lastName?.touched)"
              formControlName="last_name" type="text">
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+        <p *ngIf="lastName?.hasError('required')">This field is required</p>
+      </div>
     </div>
 
     <div class="form__field">
       <label for="email" class="form__label">Email*</label>
       <input id="email" class="form__input"
+             [class.form__input_warn]="email?.invalid && (email?.dirty || email?.touched)"
              formControlName="email" type="email">
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <p *ngIf="email?.hasError('required')">This field is required</p>
+        <p *ngIf="email?.hasError('email')">This value is not valid</p>
+      </div>
     </div>
 
     <div class="form__field">
       <label for="user_type" class="form__label">Type*</label>
-      <select id="user_type" class="form__select" formControlName="user_type">
+      <select id="user_type" class="form__select"
+              [class.form__input_warn]="userType?.invalid && (userType?.dirty || userType?.touched)"
+              formControlName="user_type">
         <option>Admin</option>
         <option>Driver</option>
       </select>
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="userType?.invalid && (userType?.dirty || userType?.touched)">
+        <p *ngIf="userType?.hasError('required')">This field is required</p>
+      </div>
     </div>
 
     <div class="form__field">
-      <label for="password" class="form__label">Email*</label>
+      <label for="password" class="form__label">Password*</label>
       <input id="password" class="form__input"
+             [class.form__input_warn]="password?.invalid && (password?.dirty || password?.touched)"
              formControlName="password" type="password">
-      <p *ngIf="false" class="form__error">Error message</p>
+      <div class="form__error"
+           *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+        <p *ngIf="username?.hasError('required')">This field is required</p>
+        <p *ngIf="username?.hasError('invalidPassword')">Password should have minimum 8 characters, at least one number and one letter</p>
+      </div>
     </div>
 
     <div class="form__field">
       <label for="repeat_password" class="form__label">Repeat password*</label>
       <input id="repeat_password" class="form__input"
-             type="password">
-      <p *ngIf="false" class="form__error">Error message</p>
+             [class.form__input_warn]="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)"
+             formControlName="repeat_password" type="password">
+      <div class="form__error"
+           *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
+        <p *ngIf="repeatPassword?.hasError('required')">This field is required</p>
+        <p *ngIf="repeatPassword?.hasError('passwordMismatch')">Passwords doesn't match</p>
+      </div>
     </div>
 
     <footer class="form__footer" [class.form__footer_center]="!user.id">
-      <button *ngIf="!user.id" class="button button_primary" (click)="saveNewUser()">Create</button>
+      <p>inv: {{userForm.invalid}}</p>
+      <button *ngIf="!user.id" class="button button_primary" type="button"
+              [disabled]="userForm.invalid"
+              (click)="saveNewUser()">Create</button>
       <button *ngIf="user.id" class="button button_alarm" (click)="deleteUser()">Delete</button>
-      <button *ngIf="user.id" class="button button_primary" (click)="updateUser()">Save</button>
+      <button *ngIf="user.id" class="button button_primary" type="button"
+              [disabled]="userForm.invalid"
+              (click)="updateUser()">Save</button>
     </footer>
   </form>
 
