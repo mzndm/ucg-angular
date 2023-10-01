@@ -52,5 +52,9 @@
 
   th, td {
     padding: 0 0 0 26px;
+
+    &:last-of-type {
+      padding-right: 26px;
+    }
   }
 }

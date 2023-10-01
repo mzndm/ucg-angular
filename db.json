@@ -7,6 +7,7 @@
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
       "password": "q1324567",
+      "repeat_password": "1234567q",
       "user_type": "Admin"
     },
     {
@@ -16,6 +17,7 @@
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
       "password": "q1324567",
+      "repeat_password": "1234567q",
       "user_type": "Admin"
     },
     {
@@ -25,6 +27,7 @@
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
       "password": "q1324567",
+      "repeat_password": "1234567q",
       "user_type": "Admin"
     }
   ]
