@@ -6,7 +6,7 @@
       "first_name": "Matthew",
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
-      "password": "q1324567",
+      "password": "1234567q",
       "repeat_password": "1234567q",
       "user_type": "Admin"
     },
@@ -16,7 +16,7 @@
       "first_name": "Matthew",
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
-      "password": "q1324567",
+      "password": "1234567q",
       "repeat_password": "1234567q",
       "user_type": "Admin"
     },
@@ -26,7 +26,7 @@
       "first_name": "Matthew",
       "last_name": "Perry",
       "email": "mperry1992@mail.com",
-      "password": "q1324567",
+      "password": "1234567q",
       "repeat_password": "1234567q",
       "user_type": "Admin"
     }
