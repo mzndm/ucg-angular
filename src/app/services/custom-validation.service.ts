@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {DataService} from "./data.service";
 import {map} from "rxjs";
+import {IUser} from "../core/models";
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class CustomValidationService {
 
   constructor(private dataService: DataService) { }
 
-  usernameValidator(): AsyncValidatorFn {
+  usernameValidator(user: IUser): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return this.dataService.checkIfUsernameExists(control.value)
+      return this.dataService.checkIfUsernameExists(control.value, user?.id)
         .pipe(
           map((result: boolean) => result ? {usernameExists: true} : null)
         )

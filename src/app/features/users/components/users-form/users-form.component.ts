@@ -62,13 +62,15 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     this.user$ = this.route.url.pipe(
       switchMap((urls: UrlSegment[]) => {
         if (urls[0].path === 'new') {
-          this.username?.addAsyncValidators([this.customValidator.usernameValidator()])
           return of(this.userForm.value)
         } else {
           return this.dataService.getUser(urls[0].path)
         }
       }),
-      tap((user: IUser) => this.userForm.patchValue(user))
+      tap((user: IUser) => {
+        this.userForm.patchValue(user);
+        this.username?.addAsyncValidators([this.customValidator.usernameValidator(user)]);
+      })
     );
   }
 

@@ -60,7 +60,7 @@ export class DataService {
       .pipe(switchMap(() => this.getUsers()));
   }
 
-  checkIfUsernameExists(value: string): Observable<boolean> {
-    return of(this.users$.value.some(u => u.username === value) as boolean);
+  checkIfUsernameExists(value: string, userId: string | undefined | null): Observable<boolean> {
+    return of(this.users$.value.some(u => u.username === value && u.id !== userId) as boolean);
   }
 }
