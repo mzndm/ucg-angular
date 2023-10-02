@@ -28,9 +28,12 @@
   }
 
   &__title {
+    max-width: calc(100% - 50px);
     font: $title-font;
     font-weight: bold;
     margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &__field {
@@ -61,6 +64,7 @@
     border-radius: 6px;
     padding: 0 16px;
     outline: none;
+    text-overflow: ellipsis;
 
     &_warn {
       border: 1px solid $warn;

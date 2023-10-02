@@ -52,6 +52,9 @@
 
   th, td {
     padding: 0 0 0 26px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:last-of-type {
       padding-right: 26px;
